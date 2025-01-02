@@ -9,7 +9,7 @@ def get_password_hash(password):
 
 
 def sum(a, b):
-    # sum function
+    #sum function
 
 
 
