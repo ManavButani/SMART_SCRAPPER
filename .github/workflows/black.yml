@@ -4,6 +4,8 @@ on:
   push:
       branches:
         - master
+      paths-ignore:
+        - '**.github-actions[bot]/**'
   pull_request:
   
 jobs:
