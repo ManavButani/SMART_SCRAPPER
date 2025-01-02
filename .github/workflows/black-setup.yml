@@ -1,0 +1,44 @@
+name: Apply Black Formatter
+ 
+on:
+  push:
+    # Trigger only on the first push to the default branch
+    branches:
+      - master
+ 
+permissions:
+  contents: write
+ 
+jobs:
+  format-code:
+    runs-on: ubuntu-latest
+ 
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+ 
+      # Step 2: Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'  # Or the Python version you use
+ 
+      # Step 3: Install Black
+      - name: Install Black
+        run: |
+          pip install black
+ 
+      # Step 4: Run Black Formatter
+      - name: Run Black Formatter
+        run: |
+          black .
+ 
+      # Step 5: Commit and Push Changes
+      - name: Commit and Push Changes
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "Apply Black formatting on first push" || echo "No changes to commit"
+          git push origin HEAD
