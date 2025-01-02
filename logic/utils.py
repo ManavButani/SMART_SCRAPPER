@@ -12,3 +12,7 @@ def sum(a, b):
     # sum function
 
     return a + b
+
+
+def sub(x,y):
+    return x-y
