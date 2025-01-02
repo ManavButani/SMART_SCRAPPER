@@ -1,9 +1,9 @@
-name: Black Formatter Check
+name: Black Formatter Apply
 
 on:
   push:
       branches:
-        - main
+        - master
   pull_request:
   
 jobs:
