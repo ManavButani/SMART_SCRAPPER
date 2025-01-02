@@ -23,9 +23,9 @@ jobs:
         run: |
           pip install black
           
-      - name: Run Black
+      - name: Run Black and commit changes
         run: |
-          black --check --diff .
+          black .
 
 
 
