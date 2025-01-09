@@ -57,34 +57,37 @@ def scrape_homepage(url: str):
 
 def smart_openai_analyzer(content: str, api_key: str, model: str, structured_output):
 
-    client = OpenAI(api_key=api_key)
+    try:
+        client = OpenAI(api_key=api_key)
+                        
+        prompt = """
+            Using the homepage content, your task is to find below details:
+            Industry: What industry does the website belong to?
 
-    prompt = """
-        Using the homepage content, your task is to find below details:
-        Industry: What industry does the website belong to?
+            Company Size: What is the size of the company (e.g., small, medium, large) if mentioned?. 
+            If not mentioned then you can get the idea by
+            1. their current employee strengh 
+            2. by number of customers 
+            3. by number of higher authority person. 
+            4. by awards win during lifetime.
+            default is small.
 
-        Company Size: What is the size of the company (e.g., small, medium, large) if mentioned?. 
-        If not mentioned then you can get the idea by
-        1. their current employee strengh 
-        2. by number of customers 
-        3. by number of higher authority person. 
-        4. by awards win during lifetime.
-        default is small.
+            Location: Where is the company located (if mentioned), try to fetch the whole address with pincode?
+        """
 
-        Location: Where is the company located (if mentioned), try to fetch the whole address with pincode?
-    """
+        completion = client.beta.chat.completions.parse(
+            model="gpt-4o",
+            messages=[
+                {"role": "system", "content": prompt},
+                {
+                    "role": "user",
+                    "content": content,
+                },
+            ],
+            response_format=structured_output,
+        )
 
-    completion = client.beta.chat.completions.parse(
-        model="gpt-4o",
-        messages=[
-            {"role": "system", "content": prompt},
-            {
-                "role": "user",
-                "content": content,
-            },
-        ],
-        response_format=structured_output,
-    )
-
-    event = completion.choices[0].message.parsed
-    return event
+        event = completion.choices[0].message.parsed
+        return event, 200
+    except Exception as e:
+        return str(e), 400

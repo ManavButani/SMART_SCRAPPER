@@ -21,12 +21,15 @@ async def scrape_home(
                 status_code=400, detail=f"Failed to extract data: {scrapped_content}"
             )
 
-        return smart_openai_analyzer(
+        content, code = smart_openai_analyzer(
             content=scrapped_content,
             api_key=data.openai_key,
             model=data.model,
             structured_output=HomePageScrapperOut,
         )
+
+        if code==200:
+            return content
 
     raise HTTPException(
         status_code=code, detail=f"Failed to extract data: {scrapped_content}"
