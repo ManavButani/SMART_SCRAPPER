@@ -28,7 +28,7 @@ async def scrape_home(
             structured_output=HomePageScrapperOut,
         )
 
-        if code==200:
+        if code == 200:
             return content
 
     raise HTTPException(

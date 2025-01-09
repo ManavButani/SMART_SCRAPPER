@@ -59,7 +59,7 @@ def smart_openai_analyzer(content: str, api_key: str, model: str, structured_out
 
     try:
         client = OpenAI(api_key=api_key)
-                        
+
         prompt = """
             Using the homepage content, your task is to find below details:
             Industry: What industry does the website belong to?
