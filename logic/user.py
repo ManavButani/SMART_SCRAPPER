@@ -14,9 +14,6 @@ def create_user(
     db_user = UserInDB(
         username=username,
         hashed_password=hashed_password,
-        email=email,
-        full_name=full_name,
-        disabled=False,
     )
     db.add(db_user)
     db.commit()

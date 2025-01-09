@@ -1,0 +1,1 @@
+DS = "/scrapper_application"
