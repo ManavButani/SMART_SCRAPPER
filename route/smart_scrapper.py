@@ -8,7 +8,7 @@ router = APIRouter()
 
 
 # Example items belonging to the current user
-@router.post("/smart_scrapping/", response_model=HomePageScrapperOut)
+@router.post("/home_page/", response_model=HomePageScrapperOut)
 async def scrape_home(
     data: HomePageScrapperIn, current_user: User = Depends(get_current_active_user)
 ):

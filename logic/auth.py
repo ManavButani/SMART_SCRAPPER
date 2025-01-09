@@ -12,7 +12,7 @@ from const.route import DS
 from const.auth import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
 
 # Define oauth2_scheme globally
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl=f"{DS}/auth/login")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl=f"{DS}/auth/login/")
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
